@@ -13,5 +13,5 @@
 
 ## Do realizacji
 
-[Zadanie 1](https://github.com/yuppyavd/tecna-szkolenie-2017/wiki/zadanie1)
-[Zadanie 2](https://github.com/yuppyavd/tecna-szkolenie-2017/wiki/zadanie2)
+- [Zadanie 1](https://github.com/yuppyavd/tecna-szkolenie-2017/wiki/zadanie1)
+- [Zadanie 2](https://github.com/yuppyavd/tecna-szkolenie-2017/wiki/zadanie2)
