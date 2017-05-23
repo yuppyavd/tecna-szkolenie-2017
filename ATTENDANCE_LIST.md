@@ -1,3 +1,4 @@
 # Lista obecności
 
 - PO
+- ŁT
