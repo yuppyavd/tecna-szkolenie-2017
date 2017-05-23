@@ -2,3 +2,4 @@
 
 - PO
 - RK
+Patryk Kwaśniak
