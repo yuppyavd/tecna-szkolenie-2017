@@ -1,3 +1,4 @@
-# Lista obecności
+﻿# Lista obecności
 
 - PO
+- Patrycja Suchocka
