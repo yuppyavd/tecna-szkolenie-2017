@@ -33,7 +33,7 @@ public class GreetingServiceImpl implements GreetingService {
 		input = escapeHtml(input);
 		userAgent = escapeHtml(userAgent);
 
-		return "Hello, " + input + "!<br><br>I am running " + serverInfo
+		return "Hellgfgfgfo, " + input + "!<br><br>I am running " + serverInfo
 				+ ".<br><br>It looks like you are using:<br>" + userAgent;
 	}
 

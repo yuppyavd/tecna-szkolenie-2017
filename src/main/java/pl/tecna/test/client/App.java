@@ -44,15 +44,32 @@ public class App implements EntryPoint {
     final TextBox nameField = new TextBox();
     nameField.setText( messages.nameField() );
     final Label errorLabel = new Label();
-
+    final Button sendButton2 = new Button( messages.sendButton2() );
+    
+    
+ //    Make a new button that does something when you click it.
+//  final  Button b = new Button("Jump!", new ClickHandler() {
+//      public void onClick(ClickEvent event) {
+//        dialogVPanel.add(new HTML("<b>Sending name to the server:</b>"));
+//      }
+//    });
+//
+//    // Add it to the root panel.
+//    RootPanel.get().add(b);
+//  }
+    
+    
     // We can add style names to widgets
+    
     sendButton.addStyleName("sendButton");
+    sendButton.addStyleName("send");
 
     // Add the nameField and sendButton to the RootPanel
     // Use RootPanel.get() to get the entire body element
     RootPanel.get("nameFieldContainer").add(nameField);
     RootPanel.get("sendButtonContainer").add(sendButton);
     RootPanel.get("errorLabelContainer").add(errorLabel);
+    RootPanel.get("sendButtonContainer").add(sendButton2);
 
     // Focus the cursor on the name field when the app loads
     nameField.setFocus(true);
@@ -103,6 +120,7 @@ public class App implements EntryPoint {
           sendNameToServer();
         }
       }
+      
 
       /**
        * Send the name from the nameField to the server and wait for a response.
@@ -143,7 +161,10 @@ public class App implements EntryPoint {
 
     // Add a handler to send the name to the server
     MyHandler handler = new MyHandler();
+  //  MyHandler2 handler2 = new MyHandler2();
     sendButton.addClickHandler(handler);
+    nameField.addKeyUpHandler(handler);
+    sendButton2.addClickHandler(handler);
     nameField.addKeyUpHandler(handler);
   }
 }
