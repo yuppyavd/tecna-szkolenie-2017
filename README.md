@@ -1,5 +1,7 @@
 # Tecna Szkolenie 2017
 
+- [Lista obecności](ATTENDANCE_LIST.md)
+
 ## Prezentacje
 
 - [Część 1: Repozytoria](http://dl.yuppy.pl/szkolenie/p1.html)
