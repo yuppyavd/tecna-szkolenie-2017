@@ -1,4 +1,4 @@
 # Lista obecności
 
 - PO
-cokolwiek
+- Kamil Piotrowski
