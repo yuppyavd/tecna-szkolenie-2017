@@ -1,4 +1,5 @@
 # Lista obecności
 
 - PO
-KK
+
+Krzysztof Kopydłowski
