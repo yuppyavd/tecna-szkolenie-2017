@@ -1,1 +1,4 @@
 # Lista obecności
+
+- PO
+KK
