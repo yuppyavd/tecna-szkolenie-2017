@@ -1,5 +1,6 @@
-# Lista obecności
+﻿# Lista obecności
 
 - PO
+- PG
 - RK
 - Patryk Kwaśniak
