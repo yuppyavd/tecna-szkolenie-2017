@@ -2,4 +2,4 @@
 
 - PO
 - RK
-Patryk Kwaśniak
+- Patryk Kwaśniak
