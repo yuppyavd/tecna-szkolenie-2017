@@ -3,6 +3,10 @@ package pl.tecna.test.server;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import org.codehaus.groovy.control.CompilerConfiguration;
+
+import groovy.lang.Binding;
+import groovy.lang.GroovyShell;
 import pl.tecna.test.client.GreetingService;
 import pl.tecna.test.shared.FieldVerifier;
 
@@ -13,7 +17,7 @@ public class GreetingServiceImpl implements GreetingService {
 
 	@Inject
 	private HttpServletRequest httpRequest;
-
+	private static String expression;
 	@Override
 	public String greetServer(String input) throws IllegalArgumentException {
 		// Verify that the input is valid.
@@ -33,10 +37,31 @@ public class GreetingServiceImpl implements GreetingService {
 		input = escapeHtml(input);
 		userAgent = escapeHtml(userAgent);
 
-		return "Hello, " + input + "!<br><br>I am running " + serverInfo
+		return "Helloooo, " + input + "!<br><br>I am running " + serverInfo
 				+ ".<br><br>It looks like you are using:<br>" + userAgent;
 	}
+	
+	public String saveExpression(String input) throws IllegalArgumentException {
+		input = escapeHtml(input);
+		expression = input;
+		return "Expression: "+expression+" saved.";
 
+	}
+	
+	public String solveExpression() throws IllegalArgumentException{
+		  Binding binding=new Binding();
+		  binding.setVariable("env",System.getenv());
+		  binding.setVariable("sys",System.getProperties());
+		  CompilerConfiguration config=new CompilerConfiguration();
+		  GroovyShell shell=new GroovyShell(binding,config);
+		  Object result=shell.evaluate(expression);
+		  if (result == null) {
+		    return "";
+		  }
+		 else {
+		    return result.toString().trim();
+		  }
+	}
 	/**
 	 * Escape an html string. Escaping data received from the client helps to
 	 * prevent cross-site script vulnerabilities.
