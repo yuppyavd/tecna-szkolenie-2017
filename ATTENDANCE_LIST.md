@@ -1,4 +1,9 @@
-# Lista obecności
+﻿# Lista obecności
 
 - PO
-Adrian Wieczorek
+- Adrian Wieczorek
+- PT
+- Kamil Piotrowski
+- PG
+- RK
+- Patryk Kwaśniak
