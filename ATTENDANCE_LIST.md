@@ -1,6 +1,7 @@
 ﻿# Lista obecności
 
 - PO
+- ŁT
 - PP
 - Adrian Wieczorek
 - PT
