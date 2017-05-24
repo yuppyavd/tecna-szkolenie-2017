@@ -90,6 +90,11 @@
     <artifactId>MathParser.org-mXparser</artifactId>
     <version>4.0.0</version>
 </dependency>
+<dependency>
+    <groupId>org.codehaus.groovy</groupId>
+    <artifactId>groovy-all</artifactId>
+    <version>2.4.11</version>
+</dependency>
 				
 	</dependencies>
 

@@ -2,6 +2,7 @@ package pl.tecna.test.server;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import pl.tecna.test.client.GreetingService;
 import pl.tecna.test.shared.FieldVerifier;
@@ -14,7 +15,7 @@ public class GreetingServiceImpl implements GreetingService {
 
 	@Inject
 	private HttpServletRequest httpRequest;
-
+	
 	@Override
 	public String greetServer(String input) throws IllegalArgumentException {
 		// Verify that the input is valid.
@@ -28,16 +29,15 @@ public class GreetingServiceImpl implements GreetingService {
 
 		String serverInfo = httpRequest.getServletContext().getServerInfo();
 		String userAgent = httpRequest.getHeader("User-Agent");
-
+		HttpSession session=httpRequest.getSession();
+		
 		// Escape data from the client to avoid cross-site script
 		// vulnerabilities.
 		input = escapeHtml(input);
 		String a=input;
-		Expression e = new Expression(a);
-		double v = e.calculate();
-		userAgent = escapeHtml(userAgent);
-
-		return "The result is " +v;
+		session.setAttribute("object", input);
+		//return "The result is " +v;
+		return input;
 	}
 
 	/**
@@ -55,4 +55,14 @@ public class GreetingServiceImpl implements GreetingService {
 		return html.replaceAll("&", "&amp;").replaceAll("<", "&lt;")
 				.replaceAll(">", "&gt;");
 	}
+	public String calculator()
+	{
+		HttpSession session=httpRequest.getSession();
+		String a;
+		a=session.getAttribute("object").toString();
+		Expression e = new Expression(a);
+		double v = e.calculate();
+		return "The result is" +v;
+	}
 }
+
