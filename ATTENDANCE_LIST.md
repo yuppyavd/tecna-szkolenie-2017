@@ -1,6 +1,7 @@
 ﻿# Lista obecności
 
 - PO
+- PK
 - PS
 - LZ
 - ŁT
