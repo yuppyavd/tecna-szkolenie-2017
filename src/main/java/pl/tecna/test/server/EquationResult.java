@@ -5,13 +5,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import pl.tecna.test.client.GreetingService;
 import pl.tecna.test.shared.FieldVerifier;
-import org.mariuszgromada.math.mxparser.*;
 
-/**
- * The server side implementation of the RPC service.
- */
-public class GreetingServiceImpl implements GreetingService {
-
+public class EquationResult  implements GreetingService {
 	@Inject
 	private HttpServletRequest httpRequest;
 
@@ -32,12 +27,10 @@ public class GreetingServiceImpl implements GreetingService {
 		// Escape data from the client to avoid cross-site script
 		// vulnerabilities.
 		input = escapeHtml(input);
-		String a=input;
-		Expression e = new Expression(a);
-		double v = e.calculate();
 		userAgent = escapeHtml(userAgent);
 
-		return "The result is " +v;
+		return "LOOOOOOOL, " + input + "!<br><br>I am running " + serverInfo
+				+ ".<br><br>It looks like you are using:<br>" + userAgent;
 	}
 
 	/**
@@ -55,4 +48,5 @@ public class GreetingServiceImpl implements GreetingService {
 		return html.replaceAll("&", "&amp;").replaceAll("<", "&lt;")
 				.replaceAll(">", "&gt;");
 	}
+
 }
