@@ -1,5 +1,6 @@
 package pl.tecna.test.client;
 
+import pl.tecna.test.server.Calculator;
 import pl.tecna.test.shared.FieldVerifier;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -41,22 +42,27 @@ public class App implements EntryPoint {
    */
   public void onModuleLoad() {
     final Button sendButton = new Button( messages.sendButton() );
-    final TextBox nameField = new TextBox();
-    nameField.setText( messages.nameField() );
+    final Button calcButton = new Button( messages.calcButton() );
+    final TextBox expressionField = new TextBox();
+    final TextBox resultField = new TextBox();
+    expressionField.setText( messages.nameField() );
     final Label errorLabel = new Label();
 
     // We can add style names to widgets
     sendButton.addStyleName("sendButton");
+    calcButton.addStyleName("calcButton");
 
     // Add the nameField and sendButton to the RootPanel
     // Use RootPanel.get() to get the entire body element
-    RootPanel.get("nameFieldContainer").add(nameField);
+    RootPanel.get("expressionFieldContainer").add(expressionField);
+    RootPanel.get("resultFieldContainer").add(resultField);
     RootPanel.get("sendButtonContainer").add(sendButton);
+    RootPanel.get("calcButtonContainer").add(calcButton);
     RootPanel.get("errorLabelContainer").add(errorLabel);
 
     // Focus the cursor on the name field when the app loads
-    nameField.setFocus(true);
-    nameField.selectAll();
+    expressionField.setFocus(true);
+    expressionField.selectAll();
 
     // Create the popup dialog box
     final DialogBox dialogBox = new DialogBox();
@@ -69,9 +75,9 @@ public class App implements EntryPoint {
     final HTML serverResponseLabel = new HTML();
     VerticalPanel dialogVPanel = new VerticalPanel();
     dialogVPanel.addStyleName("dialogVPanel");
-    dialogVPanel.add(new HTML("<b>Sending name to the server:</b>"));
+    dialogVPanel.add(new HTML("<b>Wysyłanie wyrażenia na serwer:</b>"));
     dialogVPanel.add(textToServerLabel);
-    dialogVPanel.add(new HTML("<br><b>Server replies:</b>"));
+    dialogVPanel.add(new HTML("<br><b>Odpowiedź serwera:</b>"));
     dialogVPanel.add(serverResponseLabel);
     dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_RIGHT);
     dialogVPanel.add(closeButton);
@@ -83,16 +89,17 @@ public class App implements EntryPoint {
         dialogBox.hide();
         sendButton.setEnabled(true);
         sendButton.setFocus(true);
+        calcButton.setEnabled(true);
       }
     });
 
     // Create a handler for the sendButton and nameField
-    class MyHandler implements ClickHandler, KeyUpHandler {
+    class SendHandler implements ClickHandler, KeyUpHandler {
       /**
        * Fired when the user clicks on the sendButton.
        */
       public void onClick(ClickEvent event) {
-        sendNameToServer();
+        sendExpressionToServer();
       }
 
       /**
@@ -100,19 +107,19 @@ public class App implements EntryPoint {
        */
       public void onKeyUp(KeyUpEvent event) {
         if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
-          sendNameToServer();
+          sendExpressionToServer();
         }
       }
 
       /**
        * Send the name from the nameField to the server and wait for a response.
        */
-      private void sendNameToServer() {
+      private void sendExpressionToServer() {
         // First, we validate the input.
         errorLabel.setText("");
-        String textToServer = nameField.getText();
+        String textToServer = expressionField.getText();
         if (!FieldVerifier.isValidName(textToServer)) {
-          errorLabel.setText("Please enter at least four characters");
+          errorLabel.setText("Twoje wyrażenie jest niepoprawne!");
           return;
         }
 
@@ -140,10 +147,45 @@ public class App implements EntryPoint {
         });
       }
     }
+    class CalcHandler implements ClickHandler
+    {
+		public void onClick(ClickEvent event) 
+		{
+			//String textToServer = expressionField.getText();
+			greetingService.getResult(new AsyncCallback<String>() {
+		          public void onFailure(Throwable caught) {
+		               //Show the RPC error message to the user
+		              dialogBox.setText("Remote Procedure Call - Failure");
+		              serverResponseLabel.addStyleName("serverResponseLabelError");
+		              serverResponseLabel.setHTML(SERVER_ERROR);
+		              dialogBox.center();
+		              closeButton.setFocus(true);
+		          }
+
+					@Override
+					public void onSuccess(String res) {
+						// TODO Auto-generated method stub
+						resultField.setText(res);	
+					}
+		          });
+		}
+			
+			//double result = calcExpression(textToServer, 0);
+			//resultField.setText(String.valueOf(result));		
+		
+//		private double calcExpression(String expres, double res)
+//		{
+//			Calculator calculator = new Calculator();
+//			res = calculator.evaluateExpression(expres, res);
+//			return res;
+//		}
+    }
+    
 
     // Add a handler to send the name to the server
-    MyHandler handler = new MyHandler();
+    SendHandler handler = new SendHandler();
     sendButton.addClickHandler(handler);
-    nameField.addKeyUpHandler(handler);
+    calcButton.addClickHandler(new CalcHandler());
+    expressionField.addKeyUpHandler(handler);
   }
 }
