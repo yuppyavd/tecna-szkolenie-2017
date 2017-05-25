@@ -1,8 +1,14 @@
 package pl.tecna.test.server;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.codehaus.groovy.control.CompilerConfiguration;
+
+import groovy.lang.Binding;
+import groovy.lang.GroovyShell;
 import pl.tecna.test.client.GreetingService;
 import pl.tecna.test.shared.FieldVerifier;
 
@@ -11,6 +17,8 @@ import pl.tecna.test.shared.FieldVerifier;
  */
 public class GreetingServiceImpl implements GreetingService {
 
+	@Inject
+	private HttpSession httpSession;
 	@Inject
 	private HttpServletRequest httpRequest;
 
@@ -22,7 +30,7 @@ public class GreetingServiceImpl implements GreetingService {
 			// to
 			// the client.
 			throw new IllegalArgumentException(
-					"Name must be at least 4 characters long");
+					"Name must be at least 3 characters long");
 		}
 
 		String serverInfo = httpRequest.getServletContext().getServerInfo();
@@ -32,10 +40,42 @@ public class GreetingServiceImpl implements GreetingService {
 		// vulnerabilities.
 		input = escapeHtml(input);
 		userAgent = escapeHtml(userAgent);
-
-		return "Hello, " + input + "!<br><br>I am running " + serverInfo
-				+ ".<br><br>It looks like you are using:<br>" + userAgent;
+		
+		return "saved"+input;
 	}
+	
+	@Override
+	public  String saveExpression(String input) throws IllegalArgumentException {
+				input = escapeHtml(input);
+				
+				if (!FieldVerifier.isValidName(input)) {
+							return "Name must be at least 3 characters long";
+				}
+				if (!FieldVerifier.isNumberExpresion(input)) {
+							return "Please correct your expression";
+				}
+				
+				httpSession.setAttribute("input", input);
+				return "saved:"+input;
+		 
+			}
+	@Override		
+	public String solveExpression() throws IllegalArgumentException{
+				  String expression = (String)httpSession.getAttribute("input");
+				  Binding binding=new Binding();
+				  binding.setVariable("env",System.getenv());
+				  binding.setVariable("sys",System.getProperties());
+				  CompilerConfiguration config=new CompilerConfiguration();
+				  GroovyShell shell=new GroovyShell(binding,config);
+				  Object result=shell.evaluate(expression);
+				  if (result == null) {
+				    return "error";
+				  }
+				 else {
+				    return result.toString().trim();
+				  }
+			}
+	
 
 	/**
 	 * Escape an html string. Escaping data received from the client helps to
