@@ -33,10 +33,26 @@ public class FieldVerifier {
    * @param name the name to validate
    * @return true if valid, false if invalid
    */
-  public static boolean isValidName(String name) {
-    if (name == null) {
-      return false;
-    }
-    return name.length() > 3;
+  public static boolean isValidExpression(String expres) {
+	  char[] chars = expres.toCharArray();
+		int i;
+		
+		for (i = 0; i < chars.length; i++) 
+		{
+			if(isOperator(chars[i]))	return true;
+		}
+		return false;		
   }
+  	static boolean isOperator(char operator)
+	{
+		switch (operator) {
+		case '+':
+		case '-':
+		case '*':
+		case '/':
+			return true;
+		default:
+			return false;
+		}
+	}
 }

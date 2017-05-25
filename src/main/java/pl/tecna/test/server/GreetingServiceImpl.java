@@ -17,12 +17,12 @@ public class GreetingServiceImpl implements GreetingService {
 	@Override
 	public String greetServer(String input) throws IllegalArgumentException {
 		// Verify that the input is valid.
-		if (!FieldVerifier.isValidName(input)) {
+		if (!FieldVerifier.isValidExpression(input)) {
 			// If the input is not valid, throw an IllegalArgumentException back
 			// to
 			// the client.
 			throw new IllegalArgumentException(
-					"Name must be at least 4 characters long");
+					"Brak operatora działania!");
 		}
 
 		String serverInfo = httpRequest.getServletContext().getServerInfo();
@@ -33,7 +33,7 @@ public class GreetingServiceImpl implements GreetingService {
 		input = escapeHtml(input);
 		userAgent = escapeHtml(userAgent);
 
-		return "Hello, " + input + "!<br><br>I am running " + serverInfo
+		return "Twoje wyrażenie: " + input + " zostało pobrane!<br><br>I am running " + serverInfo
 				+ ".<br><br>It looks like you are using:<br>" + userAgent;
 	}
 
