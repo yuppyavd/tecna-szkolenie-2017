@@ -117,7 +117,7 @@ public class App implements EntryPoint {
         // First, we validate the input.
         errorLabel.setText("");
         String textToServer = expressionField.getText();
-        if (!FieldVerifier.isValidExpression(textToServer)) {
+        if (!FieldVerifier.isValidName(textToServer)) {
           errorLabel.setText("Twoje wyrażenie jest niepoprawne!");
           return;
         }

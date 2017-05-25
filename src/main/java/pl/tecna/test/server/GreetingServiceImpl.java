@@ -17,7 +17,7 @@ public class GreetingServiceImpl implements GreetingService {
 	@Override
 	public String greetServer(String input) throws IllegalArgumentException {
 		// Verify that the input is valid.
-		if (!FieldVerifier.isValidExpression(input)) {
+		if (!FieldVerifier.isValidName(input)) {
 			// If the input is not valid, throw an IllegalArgumentException back
 			// to
 			// the client.

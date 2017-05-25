@@ -33,11 +33,10 @@ public class FieldVerifier {
    * @param name the name to validate
    * @return true if valid, false if invalid
    */
-  public static boolean isValidExpression(String expres) {
+  public static boolean isValidName(String expres) {
 	  char[] chars = expres.toCharArray();
-		int i;
 		
-		for (i = 0; i < chars.length; i++) 
+		for (int i = 0; i < chars.length; i++) 
 		{
 			if(isOperator(chars[i]))	return true;
 		}
