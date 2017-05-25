@@ -1,4 +1,4 @@
-package pl.tecna.test.client;
+package pl.tecna.test.server;
 
 public class Calculator {
 	double result;

@@ -1,5 +1,6 @@
 package pl.tecna.test.client;
 
+import pl.tecna.test.server.Calculator;
 import pl.tecna.test.shared.FieldVerifier;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -150,17 +151,34 @@ public class App implements EntryPoint {
     {
 		public void onClick(ClickEvent event) 
 		{
-			String textToServer = expressionField.getText();
-			double result = calcExpression(textToServer, 0);
-			resultField.setText(String.valueOf(result));		
+			//String textToServer = expressionField.getText();
+			greetingService.getResult(new AsyncCallback<String>() {
+		          public void onFailure(Throwable caught) {
+		               //Show the RPC error message to the user
+		              dialogBox.setText("Remote Procedure Call - Failure");
+		              serverResponseLabel.addStyleName("serverResponseLabelError");
+		              serverResponseLabel.setHTML(SERVER_ERROR);
+		              dialogBox.center();
+		              closeButton.setFocus(true);
+		          }
+
+					@Override
+					public void onSuccess(String res) {
+						// TODO Auto-generated method stub
+						resultField.setText(res);	
+					}
+		          });
 		}
+			
+			//double result = calcExpression(textToServer, 0);
+			//resultField.setText(String.valueOf(result));		
 		
-		private double calcExpression(String expres, double res)
-		{
-			Calculator calculator = new Calculator();
-			res = calculator.evaluateExpression(expres, res);
-			return res;
-		}
+//		private double calcExpression(String expres, double res)
+//		{
+//			Calculator calculator = new Calculator();
+//			res = calculator.evaluateExpression(expres, res);
+//			return res;
+//		}
     }
     
 
