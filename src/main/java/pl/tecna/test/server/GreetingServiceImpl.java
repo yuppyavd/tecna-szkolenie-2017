@@ -54,7 +54,7 @@ public class GreetingServiceImpl implements GreetingService {
 				if (!FieldVerifier.isNumberExpresion(input)) {
 							return "Please correct your expression";
 				}
-				
+		
 				httpSession.setAttribute("input", input);
 				return "saved:"+input;
 		 
@@ -75,7 +75,6 @@ public class GreetingServiceImpl implements GreetingService {
 				    return result.toString().trim();
 				  }
 			}
-	
 
 	/**
 	 * Escape an html string. Escaping data received from the client helps to
