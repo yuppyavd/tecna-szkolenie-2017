@@ -2,6 +2,7 @@ package pl.tecna.test.server;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.codehaus.groovy.control.CompilerConfiguration;
 
@@ -16,8 +17,9 @@ import pl.tecna.test.shared.FieldVerifier;
 public class GreetingServiceImpl implements GreetingService {
 
 	@Inject
+	private HttpSession httpSession;
+	@Inject
 	private HttpServletRequest httpRequest;
-	private static String expression;
 	@Override
 	public String greetServer(String input) throws IllegalArgumentException {
 		// Verify that the input is valid.
@@ -42,13 +44,15 @@ public class GreetingServiceImpl implements GreetingService {
 	}
 	
 	public String saveExpression(String input) throws IllegalArgumentException {
-		input = escapeHtml(input);
-		expression = input;
-		return "Expression: "+expression+" saved.";
+		input = escapeHtml(input); 
+		httpSession.setAttribute("expression", input);
+		return "Expression: "+input+" saved.";
 
 	}
 	
 	public String solveExpression() throws IllegalArgumentException{
+		
+		  String expression = (String)httpSession.getAttribute("expression");
 		  Binding binding=new Binding();
 		  binding.setVariable("env",System.getenv());
 		  binding.setVariable("sys",System.getProperties());
