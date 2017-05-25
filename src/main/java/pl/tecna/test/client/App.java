@@ -152,6 +152,7 @@ public class App implements EntryPoint {
 		public void onClick(ClickEvent event) 
 		{
 			//String textToServer = expressionField.getText();
+			
 			greetingService.getResult(new AsyncCallback<String>() {
 		          public void onFailure(Throwable caught) {
 		               //Show the RPC error message to the user
