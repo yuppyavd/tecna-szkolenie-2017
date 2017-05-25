@@ -2,3 +2,5 @@
 
 - PO
 - PG
+- RK
+- Patryk Kwaśniak
