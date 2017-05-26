@@ -8,4 +8,5 @@ import pl.tecna.test.domain.User;
 public interface UserBean {
 
 	User create(String login);
+	User getFromServer();
 }
