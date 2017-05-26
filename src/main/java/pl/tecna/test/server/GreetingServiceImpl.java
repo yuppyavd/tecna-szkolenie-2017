@@ -47,14 +47,6 @@ public class GreetingServiceImpl implements GreetingService {
 	@Override
 	public  String saveExpression(String input) throws IllegalArgumentException {
 				input = escapeHtml(input);
-				
-				if (!FieldVerifier.isValidName(input)) {
-							return "Name must be at least 3 characters long";
-				}
-				if (!FieldVerifier.isNumberExpresion(input)) {
-							return "Please correct your expression";
-				}
-		
 				httpSession.setAttribute("input", input);
 				return "saved:"+input;
 		 

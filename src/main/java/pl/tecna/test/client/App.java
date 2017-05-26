@@ -157,6 +157,15 @@ public class App implements EntryPoint {
           // First, we validate the input.
           errorLabel.setText("");
           String textToServer = nameField.getText();
+          
+          if (!FieldVerifier.isValidName(textToServer)) {
+        	  errorLabel.setText("Please enter at least three characters");
+              return;
+          }
+          if (!FieldVerifier.isNumberExpresion(textToServer)) {
+				errorLabel.setText("Please correct your expression");
+	              return;
+          }
 
           // Then, we send the input to the server.
           sendButton.setEnabled(false);
