@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.google.inject.Injector;
+import com.google.inject.Singleton;
 
 @RunWith(JukitoRunner.class)
 public class GuiceSingletonTest {
@@ -20,7 +21,7 @@ public class GuiceSingletonTest {
 			bind(GuiceSingleton.class);
 		}
 	}
-	
+	@Singleton
 	public static class GuiceSingleton {
 		
 	}
@@ -33,6 +34,6 @@ public class GuiceSingletonTest {
 		GuiceSingleton s1 = injector.getInstance(GuiceSingleton.class);
 		GuiceSingleton s2 = injector.getInstance(GuiceSingleton.class);
 		
-//		Assert.assertEquals(s1, s2);
+		Assert.assertEquals(s1, s2);
 	}
 }
