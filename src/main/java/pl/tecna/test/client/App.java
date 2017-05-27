@@ -1,5 +1,7 @@
 package pl.tecna.test.client;
 
+import pl.tecna.test.domain.Group;
+import pl.tecna.test.domain.Student;
 import pl.tecna.test.server.Calculator;
 import pl.tecna.test.shared.FieldVerifier;
 import com.google.gwt.core.client.EntryPoint;
@@ -148,8 +150,8 @@ public class App implements EntryPoint {
       }
     }
     class CalcHandler implements ClickHandler
-    {
-		public void onClick(ClickEvent event) 
+    {	
+    	public void onClick(ClickEvent event) 
 		{
 			//String textToServer = expressionField.getText();
 			
@@ -167,6 +169,7 @@ public class App implements EntryPoint {
 					public void onSuccess(String res) {
 						// TODO Auto-generated method stub
 						resultField.setText(res);	
+						
 					}
 		          });
 		}
