@@ -21,5 +21,4 @@ public class UserBeanImpl implements UserBean {
 		
 		return entity;
 	}
-
 }

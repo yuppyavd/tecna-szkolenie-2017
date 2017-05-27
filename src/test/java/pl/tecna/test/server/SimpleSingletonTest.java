@@ -6,10 +6,10 @@ import org.junit.Test;
 public class SimpleSingletonTest {
 	
 	public static class SimpleSingleton {
+		private static SimpleSingleton instance = new SimpleSingleton();
 		
 		public static SimpleSingleton getInstance() {
-			return new SimpleSingleton();
-		}
+			return instance;
 	}
 	
 	@Test
@@ -17,6 +17,7 @@ public class SimpleSingletonTest {
 		SimpleSingleton s1 = SimpleSingleton.getInstance();
 		SimpleSingleton s2 = SimpleSingleton.getInstance();
 		
-//		Assert.assertEquals(s1, s2);
+		Assert.assertEquals(s1, s2);
 	}
+}
 }

@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.google.inject.Injector;
+import com.google.inject.Singleton;
 
 @RunWith(JukitoRunner.class)
 public class GuiceSingletonTest {
@@ -17,10 +18,11 @@ public class GuiceSingletonTest {
 		
 		@Override
 		protected void configureTest() {
-			bind(GuiceSingleton.class);
+			bind(GuiceSingleton.class).in(Singleton.class);;
 		}
 	}
 	
+	@Singleton
 	public static class GuiceSingleton {
 		
 	}
