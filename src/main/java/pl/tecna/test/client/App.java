@@ -1,25 +1,11 @@
 package pl.tecna.test.client;
 
-import pl.tecna.test.domain.Group;
-import pl.tecna.test.domain.Student;
-import pl.tecna.test.server.Calculator;
 import pl.tecna.test.shared.FieldVerifier;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.KeyCodes;
-import com.google.gwt.event.dom.client.KeyUpEvent;
-import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.event.dom.client.*;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
-
+import com.google.gwt.user.client.ui.*;
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
@@ -150,11 +136,10 @@ public class App implements EntryPoint {
       }
     }
     class CalcHandler implements ClickHandler
-    {	
-    	public void onClick(ClickEvent event) 
+    {
+		public void onClick(ClickEvent event) 
 		{
 			//String textToServer = expressionField.getText();
-			
 			greetingService.getResult(new AsyncCallback<String>() {
 		          public void onFailure(Throwable caught) {
 		               //Show the RPC error message to the user
@@ -169,23 +154,10 @@ public class App implements EntryPoint {
 					public void onSuccess(String res) {
 						// TODO Auto-generated method stub
 						resultField.setText(res);	
-						
 					}
 		          });
 		}
-			
-			//double result = calcExpression(textToServer, 0);
-			//resultField.setText(String.valueOf(result));		
-		
-//		private double calcExpression(String expres, double res)
-//		{
-//			Calculator calculator = new Calculator();
-//			res = calculator.evaluateExpression(expres, res);
-//			return res;
-//		}
     }
-    
-
     // Add a handler to send the name to the server
     SendHandler handler = new SendHandler();
     sendButton.addClickHandler(handler);
