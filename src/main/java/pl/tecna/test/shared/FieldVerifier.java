@@ -37,6 +37,16 @@ public class FieldVerifier {
     if (name == null) {
       return false;
     }
-    return name.length() > 3;
+    
+    return name.length() > 2;
+  }
+  
+  public static boolean isNumberExpresion(String name){
+		for(int i=0;i<name.length();i++)
+		{
+			if(!Character.isDigit(name.charAt(i))&&name.charAt(i)!='+'&&name.charAt(i)!='-'&&name.charAt(i)!='*'&&name.charAt(i)!='/'&&name.charAt(i)!='('&&name.charAt(i)!=')')
+				return false;
+		}
+		return true;
   }
 }
