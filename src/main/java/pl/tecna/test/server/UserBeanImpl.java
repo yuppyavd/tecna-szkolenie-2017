@@ -22,4 +22,10 @@ public class UserBeanImpl implements UserBean {
 		return entity;
 	}
 
+	@Override
+	public User getFromServer() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
